@@ -41,40 +41,6 @@ namespace RFIDProject
             }
         }
 
-        //RFID로 UID 읽기
-        string buf = null;
-
-        private void Port_DataReceived(object sender, 
-            SerialDataReceivedEventArgs e)
-        {
-            String msg = Port.ReadExisting();
-
-            this.Invoke(new EventHandler(delegate
-            {
-                buf += msg;
-                if (buf.Length >= 8)		// 8 글자 모아서 표시하기
-                {
-                    label1.Text = buf;
-                    buf = null;
-
-                    string str = "INSERT INTO manager.product_tbl " +
-                        "VALUES('" + label1.Text + "', '0', '0', '0', '0' , '0', '0')" ;
-                    DataSet ds = new DataSet();
-                    OracleDataAdapter ad = new OracleDataAdapter(str, conn);
-                    ad.Fill(ds, "manager.product_tbl");
-
-                    // 리스트뷰에 행추가
-                    ListViewItem item = new ListViewItem(label1.Text);
-                    //item.SubItems.Add(textBox2.Text);
-                    //item.SubItems.Add(label1.Text);
-                    
-                    listView1.Items.Add(item);
-
-                }
-
-            }));
-        }
-
         // DB연결정보
         string connect_info = "DATA SOURCE=localhost:1521/xe;PERSIST SECURITY INFO=True;USER ID=MANAGER;PASSWORD=1234";
         OracleConnection conn;
@@ -105,7 +71,7 @@ namespace RFIDProject
             cmd = new OracleCommand();
             conn.Open();
             cmd.Connection = conn;
-            
+
         }
 
 
@@ -113,23 +79,60 @@ namespace RFIDProject
         private void button1_Click(object sender, EventArgs e)
         {
             // 상품테이블 리스트뷰로 보여주기
+            string str = "select * from product_tbl";
             DataSet ds = new DataSet();
             OracleDataAdapter ad = new OracleDataAdapter();
-            string str = "select * from manager.product_tbl";
+
             ad.SelectCommand = new OracleCommand(str, conn);
-            ad.Fill(ds, "manager.product_tbl");
+            ad.Fill(ds, "product_tbl");
 
             listView1.Items.Clear();
-            for (int i = 0; i < ds.Tables["manager.product_tbl"].Rows.Count; i++)
+            for (int i = 0; i < ds.Tables["product_tbl"].Rows.Count; i++)
             {
-                ListViewItem item = new ListViewItem(ds.Tables["manager.product_tbl"].Rows[i][0].ToString());
-                for (int j = 1; j < ds.Tables["manager.product_tbl"].Columns.Count; j++)
+                ListViewItem item = new ListViewItem(ds.Tables["product_tbl"].Rows[i][0].ToString());
+                for (int j = 1; j < ds.Tables["product_tbl"].Columns.Count; j++)
                 {
-                    item.SubItems.Add(ds.Tables["manager.product_tbl"].Rows[i][j].ToString());
+                    item.SubItems.Add(ds.Tables["product_tbl"].Rows[i][j].ToString());
                 }
                 listView1.Items.Add(item);
             }
 
+        }
+
+        //RFID로 UID 읽고 리스트뷰에 추가
+        string buf = null;
+
+        private void Port_DataReceived(object sender,
+            SerialDataReceivedEventArgs e)
+        {
+            String msg = Port.ReadExisting();
+
+            this.Invoke(new EventHandler(delegate
+            {
+                buf += msg;
+                if (buf.Length >= 8)		// 8 글자 모아서 표시하기
+                {
+                    label1.Text = buf;
+                    buf = null;
+
+                    // PRODUCT_TBL에서 EPC 검색해서 리스트뷰2로 뿌려주기
+                    string str = "select * from product_tbl WHERE EPC ='" + label1.Text + "'";
+
+                    DataSet ds = new DataSet();
+                    OracleDataAdapter ad = new OracleDataAdapter(str, conn);
+                    ad.Fill(ds, "product_tbl");
+
+                    // 리스트뷰에 행추가
+                    ListViewItem item = new ListViewItem(label1.Text);                    
+                    for (int j = 1; j < ds.Tables["product_tbl"].Columns.Count; j++)
+                    {
+                        item.SubItems.Add(ds.Tables["product_tbl"].Rows[0][j].ToString());
+                    }
+                    listView2.Items.Add(item);
+
+                }
+
+            }));
         }
     }
 }
