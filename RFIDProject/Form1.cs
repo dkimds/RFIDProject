@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.IO.Ports;
 
 namespace RFIDProject
 {
@@ -16,10 +17,65 @@ namespace RFIDProject
         {
             InitializeComponent();
         }
+        // 포트설정
+        private SerialPort _Port;
+
+        private SerialPort Port
+        {
+            get
+            {
+                if (_Port == null)
+                {
+                    _Port = new SerialPort();
+                    _Port.PortName = "COM6";
+                    _Port.BaudRate = 9600;
+                    _Port.DataBits = 8;
+                    _Port.Parity = Parity.None;
+                    _Port.Handshake = Handshake.None;
+                    _Port.StopBits = StopBits.One;
+                    _Port.Encoding = Encoding.UTF8;
+                    _Port.DataReceived += Port_DataReceived;
+                }
+                return _Port;
+            }
+        }
+
+        string buf = null;
+
+        private void Port_DataReceived(object sender, 
+            SerialDataReceivedEventArgs e)
+        {
+            String msg = Port.ReadExisting();
+
+            this.Invoke(new EventHandler(delegate
+            {
+                buf += msg;
+                if (buf.Length >= 8)		// 8 글자 모아서 표시하기
+                {
+                    label1.Text = buf;
+                    buf = null;
+                }
+            }));
+        }
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
+            if (!Port.IsOpen)
+            {
+                // 현재 시리얼이 연결된 상태가 아니면 연결.
+                try
+                {
+                    // 연결
+                    Port.Open();
+                }
+                catch (Exception ex) { label1.Text = "Error"; }
+            }
+            else
+            {
+                // 현재 시리얼이 연결 상태이면 연결 해제
+                Port.Close();
+                label1.Text = "Closed";
+            }
         }
     }
 }
