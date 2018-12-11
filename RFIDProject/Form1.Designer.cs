@@ -69,9 +69,9 @@
             this.columnHeader5,
             this.columnHeader6,
             this.columnHeader7});
-            this.listView1.Location = new System.Drawing.Point(48, 94);
+            this.listView1.Location = new System.Drawing.Point(50, 111);
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(443, 237);
+            this.listView1.Size = new System.Drawing.Size(606, 237);
             this.listView1.TabIndex = 2;
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.View = System.Windows.Forms.View.Details;
@@ -83,6 +83,7 @@
             // columnHeader2
             // 
             this.columnHeader2.Text = "주문번호";
+            this.columnHeader2.Width = 150;
             // 
             // columnHeader3
             // 
@@ -108,11 +109,11 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(221, 34);
+            this.button1.Location = new System.Drawing.Point(50, 65);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.Size = new System.Drawing.Size(95, 23);
             this.button1.TabIndex = 3;
-            this.button1.Text = "button1";
+            this.button1.Text = "테이블 보기";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 

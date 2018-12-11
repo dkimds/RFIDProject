@@ -57,6 +57,7 @@ namespace RFIDProject
                     label1.Text = buf;
                     buf = null;
                 }
+
             }));
         }
 
@@ -90,53 +91,31 @@ namespace RFIDProject
             conn.Open();
             cmd.Connection = conn;
 
-            // 상품테이블 리스트뷰로 보여주기
-            listView1.Items.Clear();
+            
+        }
 
+
+        // 테이블 보기 버튼
+        private void button1_Click(object sender, EventArgs e)
+        {
+            // 상품테이블 리스트뷰로 보여주기
             DataSet ds = new DataSet();
             OracleDataAdapter ad = new OracleDataAdapter();
             string str = "select * from manager.product_tbl";
             ad.SelectCommand = new OracleCommand(str, conn);
-            ad.Fill(ds, "product_tbl");
+            ad.Fill(ds, "manager.product_tbl");
 
-            for (int i = 0; i < ds.Tables["product_tbl"].Rows.Count; i++)
+            listView1.Items.Clear();
+            for (int i = 0; i < ds.Tables["manager.product_tbl"].Rows.Count; i++)
             {
-                ListViewItem item = new ListViewItem(ds.Tables["product_tbl"].Rows[i][0].ToString());
-                for(int j = 1; j < ds.Tables["product_tbl"].Columns.Count; j++)
+                ListViewItem item = new ListViewItem(ds.Tables["manager.product_tbl"].Rows[i][0].ToString());
+                for (int j = 1; j < ds.Tables["manager.product_tbl"].Columns.Count; j++)
                 {
-                    item.SubItems.Add(ds.Tables["product_tbl"].Rows[i][j].ToString());
-                }            
+                    item.SubItems.Add(ds.Tables["manager.product_tbl"].Rows[i][j].ToString());
+                }
                 listView1.Items.Add(item);
             }
 
         }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            //string str1 = "INSERT INTO SHOP.RFID_RECORD " +
-            //        "VALUES('" + textBox1.Text + "'" +
-            //        ", '" + textBox2.Text + "'" +
-            //        ", '" + label1.Text + "')";
-            string str = "UPDATE PRODUCT_TBL "+
-                            "SET EPC = '" + label1.Text + "'" +
-                            "WHERE EPC = ' ' ";
-
-            DataSet ds = new DataSet();
-            OracleDataAdapter ad = new OracleDataAdapter(str, conn);
-            ad.Fill(ds, "product_tbl");
-        }
-
-        //Test connection.
-
-        //private void button1_Click(object sender, EventArgs e)
-        //{
-        //    DataSet ds = new DataSet();
-        //    string SQL = "SELECT * FROM manager.product_tbl";
-        //    OracleDataAdapter ad = new OracleDataAdapter();
-        //    ad.SelectCommand = new OracleCommand(SQL, conn);
-        //    ad.Fill(ds, "product_tbl");
-        //    MessageBox.Show(ds.Tables["product_tbl"].Rows[0][0].ToString());
-        //    conn.Close();
-        //}
     }
 }
