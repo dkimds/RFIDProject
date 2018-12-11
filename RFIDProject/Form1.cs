@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO.Ports;
+using Oracle.ManagedDataAccess.Client;
 
 namespace RFIDProject
 {
@@ -40,6 +41,7 @@ namespace RFIDProject
             }
         }
 
+        //RFID로 UID 읽기
         string buf = null;
 
         private void Port_DataReceived(object sender, 
@@ -57,6 +59,11 @@ namespace RFIDProject
                 }
             }));
         }
+
+        // DB연결
+        string connect_info = "DATA SOURCE=localhost:1521/xe;PERSIST SECURITY INFO=True;USER ID=MANAGER;PASSWORD=1234";
+        OracleConnection conn;
+        OracleCommand cmd;
 
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -76,6 +83,25 @@ namespace RFIDProject
                 Port.Close();
                 label1.Text = "Closed";
             }
+
+            // 오라크DB 연결
+            conn = new OracleConnection(connect_info);
+            cmd = new OracleCommand();
+            conn.Open();
+            cmd.Connection = conn;
         }
+
+        //Test connection.
+
+        //private void button1_Click(object sender, EventArgs e)
+        //{
+        //    DataSet ds = new DataSet();
+        //    string SQL = "SELECT * FROM manager.product_tbl";
+        //    OracleDataAdapter ad = new OracleDataAdapter();
+        //    ad.SelectCommand = new OracleCommand(SQL, conn);
+        //    ad.Fill(ds, "product_tbl");
+        //    MessageBox.Show(ds.Tables["product_tbl"].Rows[0][0].ToString());
+        //    conn.Close();
+        //}
     }
 }
