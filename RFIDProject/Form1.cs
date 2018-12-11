@@ -56,18 +56,33 @@ namespace RFIDProject
                 {
                     label1.Text = buf;
                     buf = null;
+
+                    string str = "INSERT INTO manager.product_tbl " +
+                        "VALUES('" + label1.Text + "', '0', '0', '0', '0' , '0', '0')" ;
+                    DataSet ds = new DataSet();
+                    OracleDataAdapter ad = new OracleDataAdapter(str, conn);
+                    ad.Fill(ds, "manager.product_tbl");
+
+                    // 리스트뷰에 행추가
+                    ListViewItem item = new ListViewItem(label1.Text);
+                    //item.SubItems.Add(textBox2.Text);
+                    //item.SubItems.Add(label1.Text);
+                    
+                    listView1.Items.Add(item);
+
                 }
 
             }));
         }
 
-        // DB연결
+        // DB연결정보
         string connect_info = "DATA SOURCE=localhost:1521/xe;PERSIST SECURITY INFO=True;USER ID=MANAGER;PASSWORD=1234";
         OracleConnection conn;
         OracleCommand cmd;
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            // 열자마자 포트연결
             if (!Port.IsOpen)
             {
                 // 현재 시리얼이 연결된 상태가 아니면 연결.
@@ -85,12 +100,11 @@ namespace RFIDProject
                 label1.Text = "Closed";
             }
 
-            // 오라크DB 연결
+            // 열자마자 오라크DB 연결
             conn = new OracleConnection(connect_info);
             cmd = new OracleCommand();
             conn.Open();
             cmd.Connection = conn;
-
             
         }
 
