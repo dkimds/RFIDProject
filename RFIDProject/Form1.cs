@@ -106,10 +106,24 @@ namespace RFIDProject
                 {
                     item.SubItems.Add(ds.Tables["product_tbl"].Rows[i][j].ToString());
                 }            
-                //item.SubItems.Add(ds.Tables["product_tbl"].Rows[i][2].ToString());
                 listView1.Items.Add(item);
             }
 
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            //string str1 = "INSERT INTO SHOP.RFID_RECORD " +
+            //        "VALUES('" + textBox1.Text + "'" +
+            //        ", '" + textBox2.Text + "'" +
+            //        ", '" + label1.Text + "')";
+            string str = "UPDATE PRODUCT_TBL "+
+                            "SET EPC = '" + label1.Text + "'" +
+                            "WHERE EPC = ' ' ";
+
+            DataSet ds = new DataSet();
+            OracleDataAdapter ad = new OracleDataAdapter(str, conn);
+            ad.Fill(ds, "product_tbl");
         }
 
         //Test connection.
