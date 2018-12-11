@@ -89,6 +89,27 @@ namespace RFIDProject
             cmd = new OracleCommand();
             conn.Open();
             cmd.Connection = conn;
+
+            // 상품테이블 리스트뷰로 보여주기
+            listView1.Items.Clear();
+
+            DataSet ds = new DataSet();
+            OracleDataAdapter ad = new OracleDataAdapter();
+            string str = "select * from manager.product_tbl";
+            ad.SelectCommand = new OracleCommand(str, conn);
+            ad.Fill(ds, "product_tbl");
+
+            for (int i = 0; i < ds.Tables["product_tbl"].Rows.Count; i++)
+            {
+                ListViewItem item = new ListViewItem(ds.Tables["product_tbl"].Rows[i][0].ToString());
+                for(int j = 1; j < ds.Tables["product_tbl"].Columns.Count; j++)
+                {
+                    item.SubItems.Add(ds.Tables["product_tbl"].Rows[i][j].ToString());
+                }            
+                //item.SubItems.Add(ds.Tables["product_tbl"].Rows[i][2].ToString());
+                listView1.Items.Add(item);
+            }
+
         }
 
         //Test connection.
