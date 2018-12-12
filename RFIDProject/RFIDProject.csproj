@@ -42,6 +42,12 @@
     <Reference Include="MetroFramework.Fonts, Version=1.4.0.0, Culture=neutral, PublicKeyToken=5f91a84759bf584a, processorArchitecture=MSIL">
       <HintPath>..\packages\MetroModernUI.1.4.0.0\lib\net\MetroFramework.Fonts.dll</HintPath>
     </Reference>
+    <Reference Include="MindFusion.Charting, Version=4.1.1.400, Culture=neutral, PublicKeyToken=dd7449df9ffcc455" />
+    <Reference Include="MindFusion.Charting.WinForms, Version=4.1.1.400, Culture=neutral, PublicKeyToken=dd7449df9ffcc455, processorArchitecture=MSIL" />
+    <Reference Include="MindFusion.Common, Version=1.3.2.400, Culture=neutral, PublicKeyToken=dd7449df9ffcc455" />
+    <Reference Include="MindFusion.Licensing, Version=1.0.3.25443, Culture=neutral, PublicKeyToken=9d02e21d957ddaef" />
+    <Reference Include="MindFusion.Pdf, Version=1.3.2.400, Culture=neutral, PublicKeyToken=dd7449df9ffcc455" />
+    <Reference Include="MindFusion.Svg, Version=1.2.2.400, Culture=neutral, PublicKeyToken=dd7449df9ffcc455" />
     <Reference Include="Oracle.ManagedDataAccess, Version=4.122.18.3, Culture=neutral, PublicKeyToken=89b483f429c47342, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Configuration" />

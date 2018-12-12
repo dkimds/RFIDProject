@@ -45,12 +45,14 @@
             this.columnHeader10 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader11 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader12 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.metroLabel1 = new MetroFramework.Controls.MetroLabel();
+            this.metroLabel2 = new MetroFramework.Controls.MetroLabel();
             this.SuspendLayout();
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(82, 390);
+            this.label1.Location = new System.Drawing.Point(820, 69);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(133, 12);
             this.label1.TabIndex = 0;
@@ -60,11 +62,11 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(48, 390);
+            this.label2.Location = new System.Drawing.Point(668, 69);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(28, 12);
+            this.label2.Size = new System.Drawing.Size(146, 12);
             this.label2.TabIndex = 1;
-            this.label2.Text = "UID:";
+            this.label2.Text = "Electronic Product Code:";
             // 
             // listView1
             // 
@@ -76,9 +78,9 @@
             this.columnHeader5,
             this.columnHeader6,
             this.columnHeader7});
-            this.listView1.Location = new System.Drawing.Point(50, 57);
+            this.listView1.Location = new System.Drawing.Point(50, 93);
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(606, 237);
+            this.listView1.Size = new System.Drawing.Size(522, 558);
             this.listView1.TabIndex = 2;
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.View = System.Windows.Forms.View.Details;
@@ -116,11 +118,11 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(50, 28);
+            this.button1.Location = new System.Drawing.Point(154, 64);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(159, 23);
+            this.button1.Size = new System.Drawing.Size(78, 23);
             this.button1.TabIndex = 3;
-            this.button1.Text = "생산 예정 상품 보기";
+            this.button1.Text = "상품 보기";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
@@ -132,9 +134,9 @@
             this.columnHeader10,
             this.columnHeader11,
             this.columnHeader12});
-            this.listView2.Location = new System.Drawing.Point(50, 416);
+            this.listView2.Location = new System.Drawing.Point(578, 93);
             this.listView2.Name = "listView2";
-            this.listView2.Size = new System.Drawing.Size(606, 237);
+            this.listView2.Size = new System.Drawing.Size(414, 558);
             this.listView2.TabIndex = 4;
             this.listView2.UseCompatibleStateImageBehavior = false;
             this.listView2.View = System.Windows.Forms.View.Details;
@@ -161,11 +163,34 @@
             // 
             this.columnHeader12.Text = "시간";
             // 
+            // metroLabel1
+            // 
+            this.metroLabel1.AutoSize = true;
+            this.metroLabel1.FontSize = MetroFramework.MetroLabelSize.Tall;
+            this.metroLabel1.Location = new System.Drawing.Point(50, 62);
+            this.metroLabel1.Name = "metroLabel1";
+            this.metroLabel1.Size = new System.Drawing.Size(84, 25);
+            this.metroLabel1.TabIndex = 5;
+            this.metroLabel1.Text = "생산계획";
+            this.metroLabel1.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // metroLabel2
+            // 
+            this.metroLabel2.AutoSize = true;
+            this.metroLabel2.FontSize = MetroFramework.MetroLabelSize.Tall;
+            this.metroLabel2.Location = new System.Drawing.Point(578, 62);
+            this.metroLabel2.Name = "metroLabel2";
+            this.metroLabel2.Size = new System.Drawing.Size(84, 25);
+            this.metroLabel2.TabIndex = 6;
+            this.metroLabel2.Text = "공정상황";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(700, 719);
+            this.ClientSize = new System.Drawing.Size(1045, 679);
+            this.Controls.Add(this.metroLabel2);
+            this.Controls.Add(this.metroLabel1);
             this.Controls.Add(this.listView2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.listView1);
@@ -173,7 +198,7 @@
             this.Controls.Add(this.label1);
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "Form1";
-            this.Text = "Product Line Monitoring System";
+            this.Text = "Point Of Production System";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -199,6 +224,8 @@
         private System.Windows.Forms.ColumnHeader columnHeader10;
         private System.Windows.Forms.ColumnHeader columnHeader11;
         private System.Windows.Forms.ColumnHeader columnHeader12;
+        private MetroFramework.Controls.MetroLabel metroLabel1;
+        private MetroFramework.Controls.MetroLabel metroLabel2;
     }
 }
 
