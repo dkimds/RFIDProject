@@ -122,29 +122,42 @@ namespace RFIDProject
                     OracleDataAdapter ad = new OracleDataAdapter(str, conn);
                     ad.Fill(ds, "product_tbl");
 
-                    // 리스트뷰2에 행추가
-                    ListViewItem item = new ListViewItem(label1.Text);                    
-                    for (int j = 1; j < ds.Tables["product_tbl"].Columns.Count; j++)
+                    if (ds.Tables["product_tbl"].Rows.Count<=0)
                     {
-                        item.SubItems.Add(ds.Tables["product_tbl"].Rows[0][j].ToString());
+                        label1.Text = "이 태그는 생산예정이 아닙니다.";
                     }
-                    item.SubItems.Add(DateTime.Now.ToString("yyyy-MM-dd"));
-                    item.SubItems.Add(DateTime.Now.ToString("HH:mm:ss"));
-                    listView2.Items.Add(item);
+                    else
+                    {
+                        // 리스트뷰2에 행추가
+                        ListViewItem item = new ListViewItem(label1.Text);
+                        for (int j = 1; j < ds.Tables["product_tbl"].Columns.Count; j++)
+                        {
+                            item.SubItems.Add(ds.Tables["product_tbl"].Rows[0][j].ToString());
+                        }
+                        item.SubItems.Add(DateTime.Now.ToString("yyyy-MM-dd"));
+                        item.SubItems.Add(DateTime.Now.ToString("HH:mm:ss"));
+                        listView2.Items.Add(item);
 
-                    str = "INSERT INTO MANAGER.POP_TBL " +
-                            "VALUES('" + label1.Text + "'" +
-                            ", '" + item.SubItems[1].Text + "'" +
-                            ", '" + item.SubItems[2].Text + "'" +
-                            ", '" + item.SubItems[3].Text + "'" +
-                            ", '" + item.SubItems[4].Text + "')";
-                    ds = new DataSet();
-                    ad = new OracleDataAdapter(str, conn);
-                    ad.Fill(ds, "pop_tbl");
-             
+                        str = "INSERT INTO MANAGER.POP_TBL " +
+                                "VALUES('" + label1.Text + "'" +
+                                ", '" + item.SubItems[1].Text + "'" +
+                                ", '" + item.SubItems[2].Text + "'" +
+                                ", '" + item.SubItems[3].Text + "'" +
+                                ", '" + item.SubItems[4].Text + "')";
+                        ds = new DataSet();
+                        ad = new OracleDataAdapter(str, conn);
+                        ad.Fill(ds, "pop_tbl");
+
+                    }
+                    
                 }
 
             }));
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
