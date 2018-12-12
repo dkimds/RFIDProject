@@ -45,8 +45,6 @@
             this.columnHeader10 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader11 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader12 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader13 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader14 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.SuspendLayout();
             // 
             // label1
@@ -121,7 +119,7 @@
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(159, 23);
             this.button1.TabIndex = 3;
-            this.button1.Text = "생산 중인 상품 보기";
+            this.button1.Text = "생산 예정 상품 보기";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
@@ -132,9 +130,7 @@
             this.columnHeader9,
             this.columnHeader10,
             this.columnHeader11,
-            this.columnHeader12,
-            this.columnHeader13,
-            this.columnHeader14});
+            this.columnHeader12});
             this.listView2.Location = new System.Drawing.Point(50, 416);
             this.listView2.Name = "listView2";
             this.listView2.Size = new System.Drawing.Size(606, 237);
@@ -157,21 +153,12 @@
             // 
             // columnHeader11
             // 
-            this.columnHeader11.Text = "상품구성1";
+            this.columnHeader11.Text = "날짜";
             this.columnHeader11.Width = 70;
             // 
             // columnHeader12
             // 
-            this.columnHeader12.Text = "수량1";
-            // 
-            // columnHeader13
-            // 
-            this.columnHeader13.Text = "상품구성2";
-            this.columnHeader13.Width = 68;
-            // 
-            // columnHeader14
-            // 
-            this.columnHeader14.Text = "수량2";
+            this.columnHeader12.Text = "시간";
             // 
             // Form1
             // 
@@ -211,8 +198,6 @@
         private System.Windows.Forms.ColumnHeader columnHeader10;
         private System.Windows.Forms.ColumnHeader columnHeader11;
         private System.Windows.Forms.ColumnHeader columnHeader12;
-        private System.Windows.Forms.ColumnHeader columnHeader13;
-        private System.Windows.Forms.ColumnHeader columnHeader14;
     }
 }
 
